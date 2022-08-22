@@ -24,6 +24,11 @@ class App extends React.Component {
       , time
     )
   }
+
+  componentWillUnmount() {
+    console.log('.componentWillUnmount')
+    clearInterval(this.id)
+  }
 }
 
 App.proptypes = {
