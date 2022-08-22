@@ -4,11 +4,13 @@ import PropTypes from 'prop-types'
 
 class Article extends React.Component {
   state = {
-    comments: []
+    comments: [],
+    comment: ''
   }
 
   render () {
     const { title, body } = this.props
+    const { comment = '' } = this.state
     return (
       <article>
         <h1>{ title }</h1>
@@ -20,7 +22,8 @@ class Article extends React.Component {
                 <textarea
                   style={{ minWidth: '300px', minHeight: '120px' }}
                   name={'content'}
-                  onChange={this.changeHandler}
+                  onChange={this.textareaChange}
+                  value={comment}
                 />
               </label>
             </div>
@@ -54,9 +57,16 @@ class Article extends React.Component {
     })
   }
 
+  textareaChange = e => {
+    this.setState({
+      comment: e.target.value
+    }
+    )
+  }
+
   submitHandler = e => {
     e.preventDefault()
-    console.log('submitHandler')
+    console.log('dziala')
   }
 }
 
