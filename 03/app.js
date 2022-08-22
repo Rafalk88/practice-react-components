@@ -42,21 +42,6 @@ class Article extends React.Component {
     )
   }
 
-  renderComments = () => {
-    const { comments } = this.state
-    return (
-      comments.map((comment, i) => {
-        return <li key={i}>{comment}</li>
-      })
-    )
-  }
-
-  addComment = (comment) => {
-    this.setState({
-      comments: [...this.state.comments, comment]
-    })
-  }
-
   textareaChange = e => {
     this.setState({
       comment: e.target.value
@@ -66,7 +51,26 @@ class Article extends React.Component {
 
   submitHandler = e => {
     e.preventDefault()
-    console.log('dziala')
+    const { comment } = this.state
+    this.addComment(comment)
+    this.setState({
+      comment: ''
+    })
+  }
+
+  addComment = (comment) => {
+    this.setState({
+      comments: [...this.state.comments, comment]
+    })
+  }
+
+  renderComments = () => {
+    const { comments } = this.state
+    return (
+      comments.map((comment, i) => {
+        return <li key={i}>{comment}</li>
+      })
+    )
   }
 }
 
