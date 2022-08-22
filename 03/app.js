@@ -14,7 +14,7 @@ class Article extends React.Component {
         <h1>{ title }</h1>
         <p>{ body }</p>
         <section>
-          <form>
+          <form onSubmit={this.submitHandler}>
             <div>
               <label>
                 <textarea
@@ -27,7 +27,6 @@ class Article extends React.Component {
             <div><input
               type={'submit'}
               value={'dodaj komentarz'}
-              onSubmit={this.submitHandler}
                  />
             </div>
           </form>
