@@ -8,23 +8,38 @@ class Weather extends React.Component {
   }
 
   render () {
-    const { data } = this.state
-    console.log(data)
-    if (data) {
-      return <h1>{this.setWeatherInfo}</h1>
+    if (this.state.data) {
+      const [info] = this.state.data
+      return (
+        <div className={info.city_name}>
+          <p>Miasto: {info.city_name}</p>
+          <p>lat: {info.lat}</p>
+          <p>lng: {info.lon}</p>
+          <p>Temperatura: {info.temp}</p>
+        </div>
+      )
     }
     return null
   }
 
   componentDidMount () {
     const { lat, lng } = this.props
-    const key = 'e3a83e239a6c43cab8f3dd2ba8584cde'
-    const url = `https://api.weatherbit.io/v2.0/current?key=${key}&lat=${lat}&lon=${lng}`
-    const data = fetch(url)
+    const key = 'abc' //  process.env.REACT_APP_API_KEY
+    const lang = 'pl'
+    const url = `https://api.weatherbit.io/v2.0/current?key=${key}&lang=${lang}`
+    const data = fetch(`${url}&lat=${lat}&lon=${lng}`)
     data
-      .then((resp) => resp.json())
-      .then((data) => this.setState({
-        data
+      .then((resp) => {
+        if (resp.ok) {
+          return resp.json()
+        }
+        if (resp.status === 429) {
+          return Promise.reject(resp.status)
+        }
+        return Promise.reject(resp.status)
+      })
+      .then((object) => this.setState({
+        data: object.data
       }))
   }
 }
@@ -35,9 +50,21 @@ Weather.propTypes = {
 }
 
 ReactDOM.render(
-  <Weather
-    lat={52.232222}
-    lng={21.008333}
-  />,
+  <>
+    <Weather
+      lat={52.232222}
+      lng={21.008333}
+    />
+
+    <Weather
+      lat={50.061389}
+      lng={19.938333}
+    />
+
+    <Weather
+      lat={51.11}
+      lng={17.022222}
+    />
+  </>,
   document.querySelector('#root')
 )
