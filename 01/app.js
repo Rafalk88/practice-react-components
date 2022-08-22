@@ -11,6 +11,10 @@ class App extends React.Component {
 
     return <h1>{this.state.counter}</h1>
   }
+
+  componentDidMount () {
+    console.log('.componentDidMount')
+  }
 }
 
 ReactDOM.render(<App />, document.querySelector('#root'))
