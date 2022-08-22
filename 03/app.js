@@ -48,8 +48,10 @@ class Article extends React.Component {
     )
   }
 
-  changeHandler = () => {
-    console.log('changeHandler')
+  addComment = (comment) => {
+    this.setState({
+      comments: [...this.state.comments, comment]
+    })
   }
 
   submitHandler = e => {
