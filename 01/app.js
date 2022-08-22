@@ -31,7 +31,7 @@ class App extends React.Component {
   }
 }
 
-App.proptypes = {
+App.propTypes = {
   time: PropTypes.number
 }
 
