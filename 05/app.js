@@ -24,7 +24,7 @@ class Weather extends React.Component {
 
   componentDidMount () {
     const { lat, lng } = this.props
-    const key = 'abc' //  process.env.REACT_APP_API_KEY
+    const key = process.env.REACT_APP_API_KEY
     const lang = 'pl'
     const url = `https://api.weatherbit.io/v2.0/current?key=${key}&lang=${lang}`
     const data = fetch(`${url}&lat=${lat}&lon=${lng}`)
